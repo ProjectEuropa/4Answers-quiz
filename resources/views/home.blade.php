@@ -18,7 +18,7 @@
           <form action="{{ url('/') }}" method="post">
             @foreach($categories as $category)
             <label>
-                <input type="checkbox" name="categories[]" value="{{ $category->id }}" checked>{{ $category->name }}</label>
+                <input type="checkbox" name="categories[]" value="{{ $category->id }}" @if($category->id === 1 ) checked @endif>{{ $category->name }}</label>
             @endforeach
             <div class="">全項目チェック
               <button type="button" name="check_all" id="check-all" value="1">ON</button>
@@ -49,37 +49,37 @@
       @include('layouts.sidebar')
     </div>
   </main>
-
 @endsection
 
 @section('js')
 <script>
 $("#check-all").on('click', function() {
-	$("input[type='checkbox']").prop('checked',true);
+	$("input[type='checkbox']").prop('checked', true);
 });
 
 $("#check-all-off").on('click', function() {
-	$("input[type='checkbox']").prop('checked',false);
+	$("input[type='checkbox']").prop('checked', false);
 });
 
 let names =[];
 let scores =[];
+//棒グラフ表示データを配列として受け渡す
 @foreach($rankings as $ranking)
   names.push("{{ $ranking->name }}");
-  scores.push(({{ $ranking->max_percentage_correct_answer }}));
+  scores.push({{ $ranking->max_percentage_correct_answer }});
 @endforeach
 
+// 棒グラフデータ
 const barChartData = {
     labels : names,
-    datasets : [
-        {
-        label: "最高正答率",
-        backgroundColor: "rgba(0, 170, 248, 0.47)",
-        data : scores
-        }
-	],
+    datasets : 
+    [{
+      label: "最高正答率",
+      backgroundColor: "rgba(0, 170, 248, 0.47)",
+      data : scores
+    }],
 }
-
+// 棒グラフ設定
 const config = {
 	type: 'bar',
 	data: barChartData,
@@ -97,6 +97,6 @@ const config = {
 	}
 }
 const context = $("#chart")
-const chart = new Chart(context,config)
+const chart = new Chart(context, config)
 </script>
 @endsection
