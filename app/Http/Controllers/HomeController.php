@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use DB;
 use Auth;
 use App\Ranking;
+use Illuminate\Support\Facades\Config;
 
 class HomeController extends Controller
 {
@@ -13,7 +14,7 @@ class HomeController extends Controller
     protected $ranking;
 
     /**
-     * Create a new controller instance.
+     * 
      *
      * @return void
      */
@@ -33,11 +34,9 @@ class HomeController extends Controller
         $rankings = DB::table('rankings')
                     ->join('users', 'rankings.users_id', '=', 'users.id')
                     ->select('rankings.max_percentage_correct_answer', 'users.name')
-                    ->limit(7)
+                    ->limit(config('const.maxNumRankingDisplay'))
                     ->orderby('rankings.max_percentage_correct_answer', 'desc')
                     ->get();
-
-        var_dump($rankings);
 
         return view('home')->with('categories', $categories)
                            ->with('rankings', $rankings);
@@ -57,7 +56,7 @@ class HomeController extends Controller
             $ids = DB::table('quizzes')
                 ->wherein('categories_id', $categories)
                 ->inRandomOrder()
-                ->limit(10)
+                ->limit(config('const.numQuizTen'))
                 ->pluck('id');       
         } else 
         {
@@ -79,7 +78,7 @@ class HomeController extends Controller
             $usersId = \Auth::user()->id;
             $scores = DB::table('rankings')
                         ->where('users_id', $usersId)
-                        ->select('id', 'max_percentage_correct_answer')
+                        ->select('max_percentage_correct_answer')
                         ->first();
             
             if ($scores) 
