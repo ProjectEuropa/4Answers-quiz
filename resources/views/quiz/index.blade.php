@@ -43,25 +43,30 @@
       @include('layouts.sidebar')
     </div>
   </main>
-  <div id="modal-result" tabindex="-1" class="modal fade">
-      <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <button type="button" data-dismiss="modal" class="close">
-                        <span>×</span>
-                    </button>
-                    <h4 class="modal-title text-center">score</h4>
-                </div>
-                <div class="modal-body text-center">
-                  <canvas id="chart" height="200" width="400"></canvas>
-                  <div id="correctRatio"></div>
-                </div>
-                <div class="modal-footer">
-                    <a class="btn btn-primary" href="{{ url('/') }}" >終了する</a>
-                </div>
-            </div>
-        </div>
-    </div>
+  <form action="{{ url('/') }}" method="post">
+    <div id="modal-result" tabindex="-1" class="modal fade">
+        <div class="modal-dialog">
+              <div class="modal-content">
+                  <div class="modal-header">
+                      <button type="button" data-dismiss="modal" class="close">
+                          <span>×</span>
+                      </button>
+                      <h4 class="modal-title text-center">score</h4>
+                  </div>
+                  <div class="modal-body text-center">
+                    <canvas id="chart" height="200" width="400"></canvas>
+                    <div id="correctRatioText"></div>
+                    <input type="hidden" name="correctRatio" id="correctRatio">
+                    <input name="_method" type="hidden" value="PUT">
+                    <input type="hidden" name="_token" value="{{ csrf_token() }}">
+                  </div>
+                  <div class="modal-footer">
+                      <button type="submit" class="btn btn-primary">終了する</button>
+                  </div>
+              </div>
+          </div>
+      </div>
+    </form>
 @endsection
 
 @section('js')
@@ -180,7 +185,8 @@ function showReults(score, quizNum) {
       }]
     }
   });
-  $("#correctRatio").text("正解率" + correctRatio + "%");
+  $("#correctRatio").val(correctRatio);
+  $("#correctRatioText").text("正解率" + correctRatio + "%");
   $("#modal-result").modal();
 }
 </script>

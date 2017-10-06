@@ -49,6 +49,7 @@
       @include('layouts.sidebar')
     </div>
   </main>
+
 @endsection
 
 @section('js')
@@ -61,13 +62,20 @@ $("#check-all-off").on('click', function() {
 	$("input[type='checkbox']").prop('checked',false);
 });
 
+let names =[];
+let scores =[];
+@foreach($rankings as $ranking)
+  names.push("{{ $ranking->name }}");
+  scores.push(({{ $ranking->max_percentage_correct_answer }}));
+@endforeach
+
 const barChartData = {
-    labels : ["山田","田中","鈴木","佐藤","高橋","中田"],
+    labels : names,
     datasets : [
         {
         label: "最高正答率",
         backgroundColor: "rgba(0, 170, 248, 0.47)",
-        data : [95,90,85,80,75,70]
+        data : scores
         }
 	],
 }
@@ -79,7 +87,11 @@ const config = {
 	options: {
 		scales: {
 			yAxes: [{
-				ticks: {beginAtZero: true}
+				ticks: {
+          beginAtZero: true,
+          min: 0,
+          max: 100
+        }
 			}]			
 		}
 	}
