@@ -9,10 +9,13 @@
             <img id="what-is-mark" src="image\what-is-mark.png">第@{{ answerNo }}問
           </h2>
           <p>@{{ title }}</p>
+          <div v-if="imageSrc !== null">
+            <img class="img-responsive" id="quiz-image" :src="imageSrc">
+          </div>
           <div id="answer-list">
             <ul>
               <li v-for="(answer, index) in answers">
-                <a><button @click="goAnswer(index + 1)" v-bind:disabled="isAnswerNotAlready">@{{ index + 1 }}</button></a>@{{ answer }}
+                <a><button @click="goAnswer(index + 1)" :disabled="isAnswerNotAlready">@{{ index + 1 }}</button></a>@{{ answer }}
               </li>
             </ul>
           </div>
@@ -88,6 +91,7 @@ function initVue(data) {
         el: '#vue-app',
         data: {
           title: data.title,
+          imageSrc: data.image_src,
           answers:[
               data.answer_1, data.answer_2,data. answer_3, data.answer_4,
           ],
@@ -151,6 +155,7 @@ function findNextQuiz(id) {
                 endQuiz();
             } else {
                 vueApp.title = data.title;
+                vueApp.imageSrc = data.image_src;
                 vueApp.answers = [data.answer_1, data.answer_2, data.answer_3, data.answer_4];
                 vueApp.correctAnswerNo = data.correct_answer_no;
                 vueApp.commentary = data.commentary;
