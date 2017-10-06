@@ -3,7 +3,6 @@
   src: url(../font/NasuM-Regular.ttf);
 }
 
-
 body {
   font-family: NasuM-Regular, sans-serif;
 }
@@ -16,9 +15,11 @@ html {
 body {
   margin-bottom: 60px;
 }
+
 header {
   background: #fff;
 }
+
 header h1 {
   font-size: 12px;
 }
@@ -66,7 +67,7 @@ h3.sidebar {
 }
 
 #sns-links {
-  padding-left: 15px;
+  padding-left: 5px;
   padding-top: 10px;
 }
 
@@ -160,12 +161,16 @@ footer {
 .modal-header {
   border-radius: 5px 5px 0px 0px;
   background: #6f7882;
-  color:#fff;
+  color: #fff;
 }
 
 .modal-footer {
   border-radius: 0px 0px 5px 5px;
   background-color: #eee;
+}
+
+#quiz-image {
+  margin: 10px auto;
 }
 
 @media (min-width: 992px) {
@@ -188,6 +193,7 @@ footer {
   }
   #sns-links {
     display: flex;
+    flex-wrap: wrap;
     justify-content: space-around;
   }
 }
