@@ -101,14 +101,14 @@ class QuizController extends Controller
                 if ($quiz) {
                     return [$quiz->id => $quiz->id];
                 }
-            });;
-            $form->select('user_id')->options(function ($id) {
-                $user = Quiz::find($id);
+            });
+            $form->select('answer_id')->options(function () {
+                $quiz = Quiz::latest('id')->first();
             
-                if ($user) {
-                    return [$user->id => $user->name];
+                if ($quiz) {
+                    return [$quiz->id => $quiz->id];
                 }
-            })->ajax('/getonequiz/{id}');
+            });
             $form->display('created_at', 'Created At');
             $form->display('updated_at', 'Updated At');
         });
