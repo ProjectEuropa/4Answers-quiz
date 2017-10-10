@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Ranking extends Model
 {
-    //
+
 
     public function updateScore($correctRatio, $usersId) 
     {
@@ -16,7 +16,7 @@ class Ranking extends Model
 
     public function insertScore($correctRatio, $usersId) 
     {
-        //ユーザーがランキングになければ、スコアをInsert
+        
         $ranking = new Ranking();
         $ranking->max_percentage_correct_answer = $correctRatio;
         $ranking->users_id = $usersId;
