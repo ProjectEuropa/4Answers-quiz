@@ -10,7 +10,7 @@
           </h2>
           <p>@{{ title }}</p>
           <div v-if="imageSrc !== null">
-            <img class="img-responsive" id="quiz-image" :src="imageSrc">
+            <img class="img-responsive" id="quiz-image" :src="'image/quiz/' + imageSrc">
           </div>
           <div id="answer-list">
             <ul>
@@ -107,24 +107,28 @@ function initVue(data) {
         methods: {
             goAnswer:function(num) {
               if (num == 0) {
-                  // click 「正解を表示する」
+                  // numが0の場合は、click 「正解を表示する」
                 this.isCorrect = false;
                 this.isMistake = false;                
               } else if (num == this.correctAnswerNo) {
+                // 正解を押した場合
                 this.isCorrect = true;
                 this.isMistake = false;
                 this.score += 1;
               } else {
+                // 不正解の場合
                 this.isMistake = true;
                 this.isCorrect = false;
               }
               this.isAnswerNotAlready = true;
-
+              
+              // 問題数がクイズ総数を超えたら終了
               if (this.answerNo >= NUM_OF_QUIZ_LIMIT) {
                 endQuiz();
               }
             },
             goNextQuiz: function() {
+              // 次の問題へをクリック
               findNextQuiz(quizIdsArray[this.answerNo]);
               this.answerNo += 1;
               this.isCorrect = false;
@@ -137,7 +141,8 @@ function initVue(data) {
         },
         computed: {
             commentaryNl2br: function() {
-                return this.commentary.replace(/\n/g, "<br>");
+              // 改行コードを<br>に置換
+              return this.commentary.replace(/\n/g, "<br>");
             }
         },
         mounted: function () {
@@ -151,14 +156,17 @@ function findNextQuiz(id) {
         .then(function (response) {
             let data = response.data;
             if (data == null) {
-                //if get null data, quiz force termination
-                endQuiz();
+              //null データの場合、クイズを強制終了する
+              endQuiz();
             } else {
-                vueApp.title = data.title;
-                vueApp.imageSrc = data.image_src;
-                vueApp.answers = [data.answer_1, data.answer_2, data.answer_3, data.answer_4];
-                vueApp.correctAnswerNo = data.correct_answer_no;
-                vueApp.commentary = data.commentary;
+              // データありの場合、タイトル・画像・答え・正当No・解説を入れ替え 
+              vueApp.title = data.title;
+              vueApp.imageSrc = data.image_src;
+              vueApp.answers = [
+                data.answer_1, data.answer_2, data.answer_3, data.answer_4
+              ];
+              vueApp.correctAnswerNo = data.correct_answer_no;
+              vueApp.commentary = data.commentary;
             }
         })
         .catch(function (error) {
@@ -174,8 +182,10 @@ function endQuiz() {
 Vue.config.devtools = true;
 
 function showReults(score, quizNum) {
+  // 不正回数
   const incorrectAnswerScore = quizNum - score;
-  const correctRatio = (score / quizNum) * 100;
+  // 正解率（小数点切り捨て）
+  const correctRatio = Math.floor(score / quizNum) * 100;
   const ctx = document.getElementById("chart").getContext('2d');
   const myChart = new Chart(ctx, {
     type: 'pie',
