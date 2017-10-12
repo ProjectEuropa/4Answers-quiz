@@ -14,5 +14,6 @@ Route::group([
     $router->resource('/generalusers', UserController::class);
     $router->resource('/quiz', QuizController::class);
     $router->resource('/information', InformationController::class);
+    $router->resource('/keyword', KeywordController::class);
 
 });
