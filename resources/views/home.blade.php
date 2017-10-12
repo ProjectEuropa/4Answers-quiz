@@ -47,10 +47,10 @@
             <img id="news-mark" src="image\news-icon.png">お知らせ情報
           </h2>
           <dl>
-            <dt>2017/10/06</dt>
-            <dd>サイト開設</dd>
-            <dt>2017/09/30</dt>
-            <dd>作成プロジェクト開始</dd>
+            @foreach($informations as $information)
+            <dt>{{ $information->created_at }}</dt>
+            <dd>{{ $information->information }}</dd>
+            @endforeach
           </dl>
         </section>
       </article>

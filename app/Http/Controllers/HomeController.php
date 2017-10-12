@@ -62,10 +62,18 @@ class HomeController extends Controller
                     ->groupBy('rankings.users_id')
                     ->get();
 
+        // Information最新5件取得           
+        $informations = DB::table('informations')
+                    ->select(DB::raw("information, DATE_FORMAT(created_at, '%Y/%m/%d') as created_at"))
+                    ->limit(5)
+                    ->orderby('id', 'desc')
+                    ->get();
+
         return view('home')->with('categories', $categories)
                            ->with('synthesisRankings', $synthesisRankings)
                            ->with('monthRankings', $monthRankings)
-                           ->with('weekRankings', $weekRankings);
+                           ->with('weekRankings', $weekRankings)
+                           ->with('informations', $informations);
     }
 
     /**
