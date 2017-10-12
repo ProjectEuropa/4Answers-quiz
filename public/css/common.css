@@ -78,12 +78,12 @@ h3.sidebar {
 
 ul.keywords-texts-str-li li {
   list-style: none;
-  margin-left: -40px;
+  margin-left: -35px;
   padding-top: 10px;
 }
 
 ul.keywords-texts-str-li li a {
-  margin-left: 18px;
+  margin-left: 15px;
 }
 
 article {
@@ -101,7 +101,8 @@ article {
 #graph,
 #news,
 #correct,
-#commentary {
+#commentary,
+#search {
   border-bottom: solid;
 }
 
@@ -110,7 +111,8 @@ article {
 #graph-mark,
 #news-mark,
 #correct-mark,
-#commentary-mark {
+#commentary-mark,
+#search-mark {
   width: 10%;
 }
 
@@ -173,12 +175,22 @@ footer {
   margin: 10px auto;
 }
 
+.description {
+  margin-bottom: 30px;
+}
+
+#sns-links {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+}
+
 @media (min-width: 992px) {
   .col-md-8 {
-    width: 63%;
+    width: 60%;
   }
   .col-md-4 {
-    width: 34%;
+    width: 37%;
   }
 }
 
@@ -190,11 +202,6 @@ footer {
   }
   ul.keywords-texts-str-li li {
     margin-left: 0px;
-  }
-  #sns-links {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: space-around;
   }
 }
 
