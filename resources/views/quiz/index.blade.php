@@ -185,7 +185,7 @@ function showReults(score, quizNum) {
   // 不正回数
   const incorrectAnswerScore = quizNum - score;
   // 正解率（小数点切り捨て）
-  const correctRatio = Math.floor(score / quizNum) * 100;
+  const correctRatio = Math.floor((score / quizNum) * 100);
   const ctx = document.getElementById("chart").getContext('2d');
   const myChart = new Chart(ctx, {
     type: 'pie',

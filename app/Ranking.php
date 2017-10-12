@@ -7,18 +7,11 @@ use Illuminate\Database\Eloquent\Model;
 class Ranking extends Model
 {
 
-
-    public function updateScore($correctRatio, $usersId) 
-    {
-        Ranking::where('users_id', $usersId)
-                ->update(['max_percentage_correct_answer' => $correctRatio]);    
-    }
-
+    // ランキングテーブルに正解率とユーザーIDをInsert
     public function insertScore($correctRatio, $usersId) 
     {
-        
         $ranking = new Ranking();
-        $ranking->max_percentage_correct_answer = $correctRatio;
+        $ranking->percentage_correct_answer = $correctRatio;
         $ranking->users_id = $usersId;
         $ranking->save();  
     }
