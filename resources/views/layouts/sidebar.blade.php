@@ -71,7 +71,7 @@
             <a>き</a>
             <a>く</a>
             <a>け</a>
-            <a>こ</a>
+            <a href="{{ url('/keyword?initial=こ') }}">こ</a>
           </li>
           <li>
             <a>さ</a>

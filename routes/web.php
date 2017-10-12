@@ -21,7 +21,7 @@ Auth::routes();
 Route::get('/', 'HomeController@index')->name('home');
 Route::post('/', 'HomeController@post');
 Route::put('/', 'HomeController@put');
-
+Route::get('/keyword', 'KeywordController@index');
 
 Route::get('/getonequiz/{id}', function ($id) {
     return json_encode(DB::table('quizzes')

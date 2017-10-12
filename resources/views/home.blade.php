@@ -167,7 +167,6 @@ function changeRanking(rankingData) {
 			}
 		}
 	}
-  $("#chart").empty();
 	const context = $("#chart");
 	const chart = new Chart(context, config);
 }
