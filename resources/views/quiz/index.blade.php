@@ -54,7 +54,7 @@
                       <button type="button" data-dismiss="modal" class="close">
                           <span>×</span>
                       </button>
-                      <h4 class="modal-title text-center">score</h4>
+                      <h4 class="modal-title text-center">正解率</h4>
                   </div>
                   <div class="modal-body text-center">
                     <canvas id="chart" height="200" width="400"></canvas>
@@ -82,7 +82,8 @@ axios.get("/getonequiz/" + quizIdsArray[0])
         initVue(response.data);
     })
     .catch(function (error) {
-        console.log(error);
+        alert("エラーが発生したためホーム画面に戻ります。");
+        window.location.href = "{{ url('/')}}";
     });
 
 let vueApp;
@@ -170,7 +171,8 @@ function findNextQuiz(id) {
             }
         })
         .catch(function (error) {
-            console.log(error);
+          alert("エラーが発生したためホーム画面に戻ります。");
+          window.location.href = "{{ url('/')}}";
         });
 }
 
