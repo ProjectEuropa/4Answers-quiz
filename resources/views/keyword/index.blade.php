@@ -15,6 +15,7 @@
               <p class="text-right">カテゴリー：{{ $keyword->name }}</p>
             </dd>
             @endforeach
+          </dl>
         </section>
       </article>
       @include('layouts.sidebar')
