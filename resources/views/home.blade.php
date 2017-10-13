@@ -36,9 +36,9 @@
             <label>
               <input class="ranking-radio" type="radio" name="ranking-radio" value="1" checked>総合</label>
             <label>
-              <input class="ranking-radio" type="radio" name="ranking-radio" value="2" >月間</label>
+              <input class="ranking-radio" type="radio" name="ranking-radio" value="2" >今月</label>
             <label>
-              <input class="ranking-radio" type="radio" name="ranking-radio" value="3" >週間</label>
+              <input class="ranking-radio" type="radio" name="ranking-radio" value="3" >今週</label>
           </div>
           <canvas id="chart" height="200" width="400"></canvas>
         </section>
