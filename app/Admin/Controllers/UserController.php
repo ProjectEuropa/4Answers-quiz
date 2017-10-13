@@ -24,8 +24,8 @@ class UserController extends Controller
     {
         return Admin::content(function (Content $content) {
 
-            $content->header('header');
-            $content->description('description');
+            $content->header('一般ユーザー一覧');
+            $content->description('一般ユーザー一覧です');
 
             $content->body($this->grid());
         });
@@ -41,8 +41,8 @@ class UserController extends Controller
     {
         return Admin::content(function (Content $content) use ($id) {
 
-            $content->header('header');
-            $content->description('description');
+            $content->header('一般ユーザを編集');
+            $content->description('一般ユーザーを編集します');
 
             $content->body($this->form()->edit($id));
         });
@@ -74,7 +74,8 @@ class UserController extends Controller
         return Admin::grid(User::class, function (Grid $grid) {
 
             $grid->id('ID')->sortable();
-            $grid->name();
+            $grid->name('名前');
+            $grid->email('メールアドレス');
             $grid->created_at();
             $grid->updated_at();
         });
@@ -90,8 +91,8 @@ class UserController extends Controller
         return Admin::form(User::class, function (Form $form) {
 
             $form->display('id', 'ID');
-            $form->text('name');
-            $form->email('email');
+            $form->text('name', '名前');
+            $form->email('email', 'メールアドレス');
             $form->display('created_at', 'Created At');
             $form->display('updated_at', 'Updated At');
         });

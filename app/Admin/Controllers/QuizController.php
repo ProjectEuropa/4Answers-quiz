@@ -17,6 +17,8 @@ class QuizController extends Controller
 {
     use ModelForm;
 
+    private $category;
+
     /**
      * Index interface.
      *
@@ -26,8 +28,8 @@ class QuizController extends Controller
     {
         return Admin::content(function (Content $content) {
 
-            $content->header('header');
-            $content->description('description');
+            $content->header('クイズ一覧');
+            $content->description('クイズ一覧です');
 
             $content->body($this->grid());
         });
@@ -43,8 +45,8 @@ class QuizController extends Controller
     {
         return Admin::content(function (Content $content) use ($id) {
 
-            $content->header('header');
-            $content->description('description');
+            $content->header('クイズ編集');
+            $content->description('クイズを編集します');
 
             $content->body($this->form()->edit($id));
         });
@@ -59,8 +61,8 @@ class QuizController extends Controller
     {
         return Admin::content(function (Content $content) {
 
-            $content->header('header');
-            $content->description('description');
+            $content->header('クイズ作成');
+            $content->description('クイズを新規に作成します');
 
             $content->body($this->form());
         });
@@ -76,14 +78,13 @@ class QuizController extends Controller
         return Admin::grid(Quiz::class, function (Grid $grid) {
 
             $grid->id('ID')->sortable();
-            $grid->title();
-            $grid->answers_id();
-            $grid->category()->name('cateogry Name')->sortable();
-            $grid->answer()->answer_1();
-            $grid->answer()->answer_2();
-            $grid->answer()->answer_3();
-            $grid->answer()->answer_4();
-            $grid->image_src();
+            $grid->title('問題文');
+            $grid->category()->name('カテゴリー')->sortable();
+            $grid->answer()->answer_1('答え1');
+            $grid->answer()->answer_2('答え2');
+            $grid->answer()->answer_3('答え3');
+            $grid->answer()->answer_4('答え4');
+            $grid->image_src('イメージ画像');
             $grid->created_at();
             $grid->updated_at();
         });
@@ -104,42 +105,30 @@ class QuizController extends Controller
             $answersLatestNextId = $answersLatestId->id + 1;
 
             $form->display('id', 'ID');
-            $form->text('title')->rules('required|max:190');
-            $form->file('image_src')->removable();
-            $form->select('answers_id')->options(function () {
+            $form->text('title', '問題文')->rules('required|max:190');
+            $form->file('image_src', 'イメージ画像')->removable();
+            $form->select('answers_id', 'AnswerテーブルID')->options(function () {
                 $answersIds = Answer::select('id')->get();
                 $answersIdsArray = array();
                 $count = count($answersIds);
                 foreach($answersIds as $answersId) {
                     $answersIdsArray[$answersId->id] = $answersId->id;
-                    
                     if ($count == $answersId->id) {
                         // foreachが最後であれば、Answerテーブルの最新IDの次のIDを追加する
                         $answersIdsArray[$answersId->id + 1] = $answersId->id + 1;
                     }
                 }
-                if ($answersIdsArray) {
-                    return $answersIdsArray;
-                }
+                return $answersIdsArray;
             })->default($answersLatestNextId)->rules('required');// デフォルト値はAnswerテーブル最新IDの次のID
-            $form->select('categories_id')->options(function () {
-                $categories = Category::select('id', 'name')->get();
-
-                $categoryArray = array();
-
-                foreach($categories as $category) {
-                    $categoryArray[$category->id] = $category->name;
-                }
-            
-                if ($categoryArray) {
-                    return $categoryArray;
-                }
+            $form->select('categories_id', 'カテゴリー')->options(function () {
+                $this->category = new Category();
+                return $this->category->findCategoryArray();
             })->rules('required');
-            $form->text('answer.answer_1', 'answer_1')->rules('required');
-            $form->text('answer.answer_2', 'answer_2')->rules('required');
-            $form->text('answer.answer_3', 'answer_3')->rules('required');
-            $form->text('answer.answer_4', 'answer_4')->rules('required');
-            $form->select('answer.correct_answer_no', 'correctAnswerNo')->options(function () {
+            $form->text('answer.answer_1', '答え1')->rules('required');
+            $form->text('answer.answer_2', '答え2')->rules('required');
+            $form->text('answer.answer_3', '答え3')->rules('required');
+            $form->text('answer.answer_4', '答え4')->rules('required');
+            $form->select('answer.correct_answer_no', '正解番号')->options(function () {
                 $correctAnswerNoArray = array();
                 // 4択問題なので、1-4のセレクトボックスを生成
                 for($i = 1; $i <= 4; $i++) {
@@ -147,7 +136,7 @@ class QuizController extends Controller
                 }
                 return $correctAnswerNoArray;
             })->rules('required');
-            $form->textarea('answer.commentary', 'Commentary')->rules('required');
+            $form->textarea('answer.commentary', '解説')->rules('required');
             $form->display('created_at', 'Created At');
             $form->display('updated_at', 'Updated At');
         });

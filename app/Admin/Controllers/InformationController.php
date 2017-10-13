@@ -24,8 +24,8 @@ class InformationController extends Controller
     {
         return Admin::content(function (Content $content) {
 
-            $content->header('header');
-            $content->description('description');
+            $content->header('お知らせ情報一覧');
+            $content->description('お知らせ情報一覧です。');
 
             $content->body($this->grid());
         });
@@ -41,8 +41,8 @@ class InformationController extends Controller
     {
         return Admin::content(function (Content $content) use ($id) {
 
-            $content->header('header');
-            $content->description('description');
+            $content->header('お知らせ情報編集');
+            $content->description('お知らせ情報を編集します');
 
             $content->body($this->form()->edit($id));
         });
@@ -57,8 +57,8 @@ class InformationController extends Controller
     {
         return Admin::content(function (Content $content) {
 
-            $content->header('header');
-            $content->description('description');
+            $content->header('お知らせ情報作成');
+            $content->description('お知らせ情報を新規に作成します');
 
             $content->body($this->form());
         });
@@ -74,7 +74,7 @@ class InformationController extends Controller
         return Admin::grid(Information::class, function (Grid $grid) {
 
             $grid->id('ID')->sortable();
-            $grid->information();
+            $grid->information('お知らせ情報');
             $grid->created_at();
             $grid->updated_at();
         });
@@ -90,7 +90,7 @@ class InformationController extends Controller
         return Admin::form(Information::class, function (Form $form) {
 
             $form->display('id', 'ID');
-            $form->textarea('information', 'Information');
+            $form->textarea('information', 'お知らせ情報')->rules('required');
             $form->display('created_at', 'Created At');
             $form->display('updated_at', 'Updated At');
         });
