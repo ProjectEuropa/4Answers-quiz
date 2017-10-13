@@ -30,91 +30,91 @@
         <h3 class="text-center sidebar">キーワード集</h3>
         <ul class="keywords-texts-str-li">
           <li>
-            <a>Ａ</a>
-            <a>Ｂ</a>
-            <a>Ｃ</a>
-            <a>Ｄ</a>
-            <a>Ｅ</a>
-            <a>Ｆ</a>
-            <a>Ｇ</a>
-            <a>Ｈ</a>
-            <a>Ｉ</a>
-            <a>Ｊ</a>
+            <a href="{{ url('/keyword?initial=A') }}">Ａ</a>
+            <a href="{{ url('/keyword?initial=B') }}">Ｂ</a>
+            <a href="{{ url('/keyword?initial=C') }}">Ｃ</a>
+            <a href="{{ url('/keyword?initial=D') }}">Ｄ</a>
+            <a href="{{ url('/keyword?initial=E') }}">Ｅ</a>
+            <a href="{{ url('/keyword?initial=F') }}">Ｆ</a>
+            <a href="{{ url('/keyword?initial=G') }}">Ｇ</a>
+            <a href="{{ url('/keyword?initial=H') }}">Ｈ</a>
+            <a href="{{ url('/keyword?initial=I') }}">Ｉ</a>
+            <a href="{{ url('/keyword?initial=J') }}">Ｊ</a>
           </li>
           <li>
-            <a>Ｋ</a>
-            <a>Ｌ</a>
-            <a>Ｍ</a>
-            <a>Ｎ</a>
-            <a>Ｏ</a>
-            <a>Ｐ</a>
-            <a>Ｑ</a>
-            <a>Ｒ</a>
-            <a>Ｓ</a>
-            <a>Ｔ</a>
+            <a href="{{ url('/keyword?initial=K') }}">Ｋ</a>
+            <a href="{{ url('/keyword?initial=L') }}">Ｌ</a>
+            <a href="{{ url('/keyword?initial=M') }}">Ｍ</a>
+            <a href="{{ url('/keyword?initial=N') }}">Ｎ</a>
+            <a href="{{ url('/keyword?initial=O') }}">Ｏ</a>
+            <a href="{{ url('/keyword?initial=P') }}">Ｐ</a>
+            <a href="{{ url('/keyword?initial=Q') }}">Ｑ</a>
+            <a href="{{ url('/keyword?initial=R') }}">Ｒ</a>
+            <a href="{{ url('/keyword?initial=S') }}">Ｓ</a>
+            <a href="{{ url('/keyword?initial=T') }}">Ｔ</a>
           </li>
           <li>
-            <a>Ｕ</a>
-            <a>Ｖ</a>
-            <a>Ｗ</a>
-            <a>Ｘ</a>
-            <a>Ｙ</a>
-            <a>Ｚ</a>
+            <a href="{{ url('/keyword?initial=U') }}">Ｕ</a>
+            <a href="{{ url('/keyword?initial=V') }}">Ｖ</a>
+            <a href="{{ url('/keyword?initial=W') }}">Ｗ</a>
+            <a href="{{ url('/keyword?initial=X') }}">Ｘ</a>
+            <a href="{{ url('/keyword?initial=Y') }}">Ｙ</a>
+            <a href="{{ url('/keyword?initial=Z') }}">Ｚ</a>
           </li>
           <li>
-            <a>あ</a>
-            <a>い</a>
-            <a>う</a>
-            <a>え</a>
-            <a>お</a>
-            <a>か</a>
-            <a>き</a>
-            <a>く</a>
-            <a>け</a>
+            <a href="{{ url('/keyword?initial=あ') }}">あ</a>
+            <a href="{{ url('/keyword?initial=い') }}">い</a>
+            <a href="{{ url('/keyword?initial=う') }}">う</a>
+            <a href="{{ url('/keyword?initial=え') }}">え</a>
+            <a href="{{ url('/keyword?initial=お') }}">お</a>
+            <a href="{{ url('/keyword?initial=か') }}">か</a>
+            <a href="{{ url('/keyword?initial=き') }}">き</a>
+            <a href="{{ url('/keyword?initial=く') }}">く</a>
+            <a href="{{ url('/keyword?initial=け') }}">け</a>
             <a href="{{ url('/keyword?initial=こ') }}">こ</a>
           </li>
           <li>
-            <a>さ</a>
-            <a>し</a>
-            <a>す</a>
-            <a>せ</a>
-            <a>そ</a>
-            <a>た</a>
-            <a>ち</a>
-            <a>つ</a>
-            <a>て</a>
-            <a>と</a>
+            <a href="{{ url('/keyword?initial=さ') }}">さ</a>
+            <a href="{{ url('/keyword?initial=し') }}">し</a>
+            <a href="{{ url('/keyword?initial=す') }}">す</a>
+            <a href="{{ url('/keyword?initial=せ') }}">せ</a>
+            <a href="{{ url('/keyword?initial=そ') }}">そ</a>
+            <a href="{{ url('/keyword?initial=た') }}">た</a>
+            <a href="{{ url('/keyword?initial=ち') }}">ち</a>
+            <a href="{{ url('/keyword?initial=つ') }}">つ</a>
+            <a href="{{ url('/keyword?initial=て') }}">て</a>
+            <a href="{{ url('/keyword?initial=と') }}">と</a>
           </li>
           <li>
-            <a>な</a>
-            <a>に</a>
-            <a>ぬ</a>
-            <a>ね</a>
-            <a>の</a>
-            <a>は</a>
-            <a>ひ</a>
-            <a>ふ</a>
-            <a>へ</a>
-            <a>ほ</a>
+            <a href="{{ url('/keyword?initial=な') }}">な</a>
+            <a href="{{ url('/keyword?initial=に') }}">に</a>
+            <a href="{{ url('/keyword?initial=ぬ') }}">ぬ</a>
+            <a href="{{ url('/keyword?initial=ね') }}">ね</a>
+            <a href="{{ url('/keyword?initial=の') }}">の</a>
+            <a href="{{ url('/keyword?initial=は') }}">は</a>
+            <a href="{{ url('/keyword?initial=ひ') }}">ひ</a>
+            <a href="{{ url('/keyword?initial=ふ') }}">ふ</a>
+            <a href="{{ url('/keyword?initial=へ') }}">へ</a>
+            <a href="{{ url('/keyword?initial=ほ') }}">ほ</a>
           </li>
           <li>
-            <a>ま</a>
-            <a>み</a>
-            <a>む</a>
-            <a>め</a>
-            <a>も</a>
-            <a>ら</a>
-            <a>り</a>
-            <a>る</a>
-            <a>れ</a>
-            <a>ろ</a>
+            <a href="{{ url('/keyword?initial=ま') }}">ま</a>
+            <a href="{{ url('/keyword?initial=み') }}">み</a>
+            <a href="{{ url('/keyword?initial=む') }}">む</a>
+            <a href="{{ url('/keyword?initial=め') }}">め</a>
+            <a href="{{ url('/keyword?initial=も') }}">も</a>
+            <a href="{{ url('/keyword?initial=ら') }}">ら</a>
+            <a href="{{ url('/keyword?initial=り') }}">り</a>
+            <a href="{{ url('/keyword?initial=る') }}">る</a>
+            <a href="{{ url('/keyword?initial=れ') }}">れ</a>
+            <a href="{{ url('/keyword?initial=ろ') }}">ろ</a>
           </li>
           <li>
-            <a>や</a>
-            <a>ゆ</a>
-            <a>よ</a>
-            <a>わ</a>
-            <a>を</a>
+            <a href="{{ url('/keyword?initial=や') }}">や</a>
+            <a href="{{ url('/keyword?initial=ゆ') }}">ゆ</a>
+            <a href="{{ url('/keyword?initial=よ') }}">よ</a>
+            <a href="{{ url('/keyword?initial=わ') }}">わ</a>
+            <a href="{{ url('/keyword?initial=を') }}">を</a>
           </li>
         </ul>
     </section>
