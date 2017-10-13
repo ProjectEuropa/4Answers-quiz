@@ -12,16 +12,16 @@
 */
 
 
-// Route::get('/', function () {
-//     return view('welcome');
-// });
-
 Auth::routes();
 
 Route::get('/', 'HomeController@index')->name('home');
 Route::post('/', 'HomeController@post');
 Route::put('/', 'HomeController@put');
 Route::get('/keyword', 'KeywordController@index');
+
+Route::group(['middleware' => 'auth'], function () {
+	Route::get('/mypage', 'MypageController@index');
+});
 
 Route::get('/getonequiz/{id}', function ($id) {
     return json_encode(DB::table('quizzes')
