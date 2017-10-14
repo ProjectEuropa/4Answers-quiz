@@ -8,16 +8,14 @@ services:
 
 addons:
   mariadb: '10.0'
-
-before_install:
-    - sudo mysql -u root --password="" travis_ci_test < business-manners-quiz-test.sql
-
+    
 before_script:
     - cp .env.travis .env
     - mysql -e 'CREATE DATABASE IF NOT EXISTS travis_ci_test;'
     - composer self-update
     - composer install --no-interaction
     - php artisan key:generate
+    - mysql -u root --password="" < business-manners-quiz-test.sql
 
 
 script:
