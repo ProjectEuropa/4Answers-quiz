@@ -15,7 +15,6 @@ before_script:
     - composer self-update
     - composer install --no-interaction
     - php artisan key:generate
-    - php artisan migrate
     - mysql -u root -p travis_ci_test < business-manners-quiz-test.sql
 
 script:
