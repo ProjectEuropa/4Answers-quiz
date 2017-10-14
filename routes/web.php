@@ -22,11 +22,3 @@ Route::get('/keyword', 'KeywordController@index');
 Route::group(['middleware' => 'auth'], function () {
 	Route::get('/mypage', 'MypageController@index');
 });
-
-Route::get('/getonequiz/{id}', function ($id) {
-    return json_encode(DB::table('quizzes')
-        ->join('answers', 'quizzes.answers_id', '=', 'answers.id')
-        ->select('quizzes.*', 'answers.*')
-        ->where('quizzes.id', '=', $id)
-        ->first());
-});

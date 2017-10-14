@@ -13,6 +13,10 @@ use Illuminate\Http\Request;
 |
 */
 
-Route::middleware('auth:api')->get('/user', function (Request $request) {
-    return $request->user();
+Route::middleware('api')->get('/getonequiz/{id}', function ($id) {
+    return json_encode(DB::table('quizzes')
+    ->join('answers', 'quizzes.answers_id', '=', 'answers.id')
+    ->select('quizzes.*', 'answers.*')
+    ->where('quizzes.id', '=', $id)
+    ->first());
 });

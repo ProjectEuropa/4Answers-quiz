@@ -77,7 +77,7 @@
 const quizIdsArray = {{ $ids }};
 const NUM_OF_QUIZ_LIMIT = {{ $quizNum }};
 
-axios.get("/getonequiz/" + quizIdsArray[0])
+axios.get("{{ url('/api/getonequiz/')}}" + "/" + quizIdsArray[0])
     .then(function (response) {
         initVue(response.data);
     })
@@ -153,7 +153,7 @@ function initVue(data) {
 }
 
 function findNextQuiz(id) {
-    axios.get("/getonequiz/" + id)
+    axios.get("{{ url('/api/getonequiz/')}}" + "/" + id)
         .then(function (response) {
             let data = response.data;
             if (data == null) {
