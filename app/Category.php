@@ -6,9 +6,13 @@ use Illuminate\Database\Eloquent\Model;
 
 class Category extends Model
 {
-    //
-
-    public function findCategoryArray() 
+    /**
+     * 
+     * カテゴリー配列返却メソッド
+     * array([id]=> [name])の配列を返却する
+     * @return array
+     */
+    public function findCategoryArray():array
     {
         $categories = Category::select('id', 'name')->get();
         

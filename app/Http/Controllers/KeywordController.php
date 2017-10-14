@@ -8,7 +8,12 @@ use Illuminate\Http\Request;
 class KeywordController extends Controller
 {
 
-
+    /**
+     * 
+     * キーワードコントローラー初期処理アクション
+     * 
+     * @return aray
+     */
     public function index(Request $request) {
 
         $initial = $request->input('initial');
