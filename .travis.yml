@@ -1,0 +1,22 @@
+language: php
+
+php:
+    - 7.0
+
+services:
+  - mysql
+
+addons:
+  mariadb: '10.0'
+
+before_script:
+    - cp .env.travis .env
+    - mysql -e 'CREATE DATABASE IF NOT EXISTS travis_ci_test;'
+    - composer self-update
+    - composer install --no-interaction
+    - php artisan key:generate
+    - php artisan migrate
+    - mysql -u root -p travis_ci_test < business-manners-quiz-test.sql
+
+script:
+    - phpunit
