@@ -8,8 +8,21 @@ use Tests\TestCase;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Facades\Config;
 
-class ControllerTest extends TestCase
+class ControllerUnitTest extends TestCase
 {
+    /**
+     * ユーザーセットアップfunction
+     * ユーザーを新規に作成してログインし、作成したユーザー情報を返却する
+     *
+     * @return User class
+     */
+    private function userSetUp() : User
+    {
+        $user = factory(User::class)->create();
+        $this->be($user);
+        return $user;
+    }
+
     /**
      * ホームコントローラーindexアクションテスト.
      *
@@ -105,10 +118,9 @@ class ControllerTest extends TestCase
      */
     public function testHomeControllerPutAuth()
     {
-        $user = factory(User::class)->create();
-        $this->be($user);
+        $user = $this->userSetUp();
         $randamScore = rand(0, 100);
-        $response = $this->call('put', '/', ['correctRatio' => $randamScore]);
+        $response = $this->call('PUT', '/', ['correctRatio' => $randamScore]);
         $this->assertDatabaseHas('rankings', [
             'percentage_correct_answer' => $randamScore,
             'users_id' => $user->id
@@ -124,11 +136,44 @@ class ControllerTest extends TestCase
     public function testHomeControllerPutNotAuth()
     {
         $randamScore = rand(101, 1000);
-        $response = $this->call('put', '/', ['correctRatio' => $randamScore]);
+        $response = $this->call('PUT', '/', ['correctRatio' => $randamScore]);
         // 非ログイン時はデータはインサートされない
         $this->assertDatabaseMissing('rankings', [
             'percentage_correct_answer' => $randamScore
         ]);
+        $this->assertEquals(302, $response->status());
+    }
+    /**
+     * キーワードコントローラーアクションテスト.
+     *
+     * @return void
+     */
+    public function testKeywordController()
+    {
+        $response = $this->call('GET', '/keyword');
+        $this->assertEquals(200, $response->status());
+    }
+
+    /**
+     * マイページントローラーアクションテスト（ログイン中）.
+     *
+     * @return void
+     */
+    public function testMypageControllerAuth()
+    {
+        $user = $this->userSetUp();
+        $response = $this->call('GET', '/mypage');
+        $this->assertEquals(200, $response->status());
+    }
+
+    /**
+     * マイページントローラーアクションテスト（非ログイン）.
+     *
+     * @return void
+     */
+    public function testMypageControllerNotAuth()
+    {
+        $response = $this->call('GET', '/mypage');
         $this->assertEquals(302, $response->status());
     }
 }

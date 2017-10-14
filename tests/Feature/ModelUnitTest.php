@@ -7,7 +7,7 @@ use App\Ranking;
 use Tests\TestCase;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 
-class UnitTest extends TestCase
+class ModelUnitTest extends TestCase
 {
     /**
      * カテゴリーモデルメソッドテスト
