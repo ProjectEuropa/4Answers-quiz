@@ -8,7 +8,7 @@ class Ranking extends Model
 {
 
     // ランキングテーブルに正解率とユーザーIDをInsert
-    public function insertScore($correctRatio, $usersId) 
+    public function insertScore(int $correctRatio, int $usersId) 
     {
         $ranking = new Ranking();
         $ranking->percentage_correct_answer = $correctRatio;
