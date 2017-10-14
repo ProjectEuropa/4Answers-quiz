@@ -8,7 +8,7 @@
           <h2 id="mypage">
             <img id="mypage-icon" src="image\mypage-icon.png">マイページ
           </h2>
-          <h3>直近7回の正解率推移</h3>
+          <h3>直近{{ count($scoreDatas) }}回の正解率推移</h3>
           <canvas id="myLineChart" width="800" height="400"></canvas>
         </section>
       </article>
@@ -20,23 +20,22 @@
 @section('js')
 <script>
 
-
-let scoreTime =[];
+// 横軸ラベルは時間
+let labelTime =[];
+// 縦軸は正解率
 let scores =[];
 
 @foreach($scoreDatas as $scoreData)
-  scoreTime.push("{{ $scoreData->created_at }}");
+  labelTime.push("{{ $scoreData->created_at }}");
   scores.push({{ $scoreData->percentage_correct_answer }});
 @endforeach
 
-//折れ線グラフ
 const ctx = document.getElementById("myLineChart");
 const myLineChart = new Chart(ctx, {
-  //グラフの種類
+  //折れ線グラフ
   type: 'line',
-  //データの設定
   data: {
-      labels: scoreTime,
+      labels: labelTime,
       datasets: [{
           label: "正解率",
           backgroundColor: "rgba(0, 170, 248, 0.47)",
@@ -44,14 +43,13 @@ const myLineChart = new Chart(ctx, {
           data: scores
       }]
   },
-  //オプションの設定
   options: {
       scales: {
-          //縦軸の設定
           yAxes: [{
               ticks: {
-                  //最小値を0にする
-                  beginAtZero: true
+                  beginAtZero: true,
+                  min: 0,
+                  max: 100
               }
           }]
       }
