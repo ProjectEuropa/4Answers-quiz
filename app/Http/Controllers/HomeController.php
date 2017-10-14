@@ -25,7 +25,7 @@ class HomeController extends Controller
 
     /**
      * 
-     *
+     * ホーム画面初期処理アクション
      * @return 
      */
     public function index()
