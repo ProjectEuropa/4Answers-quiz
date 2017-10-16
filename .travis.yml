@@ -19,7 +19,6 @@ install:
 before_script:
     - cp .env.travis .env
     - mysql -e 'CREATE DATABASE IF NOT EXISTS travis_ci_test;'
-    - composer self-update
     - php artisan key:generate
     - mysql -u root --password="" travis_ci_test < business-manners-quiz-test.sql
     - export DISPLAY=:99.0
