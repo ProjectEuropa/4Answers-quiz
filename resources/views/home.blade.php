@@ -6,9 +6,9 @@
       <article class="col-md-8 col-xs-12">
         <section class="article-section">
           <h2 id="what-is">
-            <img id="what-is-mark" src="image\what-is-mark.png">ビジネスマナークイズとは?
+            <img id="what-is-mark" src="image\what-is-mark.png">4 Answers Quizとは?
           </h2>
-          <p>ビジネスマナークイズとはビジネスマナーに関するクイズを出題するWEBアプリです。</p>
+          <p>4 Answers Quizとはビジネスマナーから一般常識に至るまで様々なクイズを4択で出題するWEBアプリです。</p>
           <p>何度もトライしてみて正解率100%を目指してみてください。</p>
         </section>
         <section class="article-section">

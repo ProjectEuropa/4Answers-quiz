@@ -28,6 +28,11 @@ header {
   margin-top: -10px;
 }
 
+#header-logo {
+  width: 200px;
+  margin-top: -15px;
+}
+
 main {
   margin-top: -22px;
   padding-top: 20px;

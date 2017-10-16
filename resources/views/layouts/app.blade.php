@@ -15,7 +15,7 @@
 <body>
   <header>
     <div class="container text-center">
-      <h1>ビジネスマナークイズ　ビジネスマナー情報&徹底解説</h1>
+      <h1>4 Answers Quiz 4択クイズ&クイズ徹底解説</h1>
       <a href="{{ url('/') }}"><img id="header-logo" src="{{ asset('image\header-logo.png') }}"></a>
     </div>
     <nav class="navbar navbar-default navbar-static-top">
