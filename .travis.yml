@@ -15,7 +15,7 @@ addons:
     
 before_script:
     - cp .env.travis .env
-    - travis_retry composer install --no-interaction --prefer-dist --no-suggest
+    - travis_retry composer install --no-interaction
     - mysql -e 'CREATE DATABASE IF NOT EXISTS travis_ci_test;'
     - composer self-update
     - composer install --no-interaction
