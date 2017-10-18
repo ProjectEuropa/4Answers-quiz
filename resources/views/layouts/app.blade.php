@@ -60,7 +60,7 @@
 
   <footer>
     <div class="container text-center">
-      <small>© 2017 ビジネスマナークイズ. All rights reserved.</small>
+      <small>© 2017 {{ config('app.name', 'Laravel') }}. All rights reserved.</small>
     </div>
   </footer>
 
