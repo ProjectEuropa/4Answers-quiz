@@ -90,14 +90,14 @@ class ControllerUnitTest extends TestCase
         $response = $this->call('POST', '/', ['categories' => [1]]);
 
         $view = $response->original;
-        var_dump($view['ids']);
-        var_dump($view['quizNum']);
+        var_dump($view['ids']->mode('id'));
 
-        $idsArray = $view['ids'];
+        // 取得したIDは全てデータベースに存在するはず
+        $idsArray = $view['ids']->mode('id');
 
         if ($idsArray) {
             $this->assertDatabaseHas('quizzes', [
-                'id' => json_decode($idsArray),
+                'id' => $idsArray,
             ]);
 
             $this->assertEquals(config('const.numQuizTen'), $view['quizNum']);
