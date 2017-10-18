@@ -74,7 +74,12 @@
 
 @section('js')
 <script>
-const quizIdsArray = {{ $ids }};
+let quizIdsArray = []
+
+@foreach($ids as $id)
+  quizIdsArray.push({{ $id->id }})
+@endforeach
+
 const NUM_OF_QUIZ_LIMIT = {{ $quizNum }};
 
 axios.get("{{ url('/api/getonequiz/')}}" + "/" + quizIdsArray[0])

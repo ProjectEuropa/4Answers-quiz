@@ -89,16 +89,17 @@ class HomeController extends Controller
         {
             // 選択したカテゴリー内にあるクイズテーブルのidをランダムに10問（現在）取得
             $ids = DB::table('quizzes')
+                    ->select('id')
                     ->wherein('categories_id', $categories)
                     ->inRandomOrder()
                     ->limit(config('const.numQuizTen'))
-                    ->pluck('id');       
+                    ->get();       
         } else 
         {
             // 出題設定に何も設定していない場合は、home画面に戻る
             return back();
         }
-        return view('quiz.index')->with('ids', json_encode($ids))
+        return view('quiz.index')->with('ids', $ids)
                                  ->with('quizNum', count($ids));
     }
     /**
