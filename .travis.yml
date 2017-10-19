@@ -23,9 +23,8 @@ before_script:
     - sudo service mysql stop
     - docker-compose up -d apache2 mysql
     - docker-compose run workspace composer install
-    - docker-compose run workspace mysql -e 'CREATE DATABASE IF NOT EXISTS travis_ci_test;'
     - docker-compose run workspace php artisan key:generate
-    - docker-compose run workspace mysql -u root --password="" travis_ci_test < business-manners-quiz-test.sql
+    - cp ../.env.example .env
     - sleep 3
 
 
