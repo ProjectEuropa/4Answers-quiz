@@ -21,7 +21,6 @@ before_script:
     - cd laradock
     - cp env-example .env
     - sudo service mysql stop
-    - sudo service httpd stop
     - docker-compose up -d apache2 mysql
     - docker-compose exec workspace bash
     - mysql -e 'CREATE DATABASE IF NOT EXISTS travis_ci_test;'
