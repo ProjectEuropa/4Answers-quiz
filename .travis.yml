@@ -11,6 +11,7 @@ services:
 before_script:
     - git submodule add https://github.com/Laradock/laradock.git laradock
     - cd laradock
+    - cp ../.env.travis .env
     - docker-compose up -d apache2 mysql
     - docker-compose exec workspace bash
     - mysql -e 'CREATE DATABASE IF NOT EXISTS travis_ci_test;'
