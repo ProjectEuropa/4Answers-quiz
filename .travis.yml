@@ -6,7 +6,8 @@ language: php
 services:
   - docker
 
-
+before_install:
+    - sudo apt-get update
     
 before_script:
     - git submodule add https://github.com/Laradock/laradock.git laradock
