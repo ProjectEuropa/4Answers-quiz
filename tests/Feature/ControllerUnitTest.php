@@ -35,18 +35,18 @@ class ControllerUnitTest extends TestCase
         $view = $response->original;
         $category = new Category();
 
-        var_dump($view['synthesisRankings']->pluck('percentage_correct_answer', 'name')->toArray());
-        var_dump($view['monthRankings']->pluck('percentage_correct_answer', 'name')->toArray());
-        var_dump($view['weekRankings']->pluck('percentage_correct_answer', 'name')->toArray());
-        var_dump($view['categories']->pluck('name', 'id')->toArray());
-        var_dump($view['informations']->pluck('information', 'created_at')->toArray());
-        var_dump($view['weekRankings']->pluck('percentage_correct_answer', 'name')->toArray());
+        var_dump($view['synthesisRankings']->pluck('percentage_correct_answer')->toArray());
+        var_dump($view['monthRankings']->pluck('percentage_correct_answer')->toArray());
+        var_dump($view['weekRankings']->pluck('percentage_correct_answer')->toArray());
+        var_dump($view['categories']->pluck('id')->toArray());
+        var_dump($view['informations']->pluck('information')->toArray());
+        var_dump($view['weekRankings']->pluck('percentage_correct_answer')->toArray());
 
         // カテゴリーの取得
         $this->assertEquals($category->findCategoryArray(), $view['categories']->pluck('name', 'id')->toArray());
 
         // お知らせ情報の取得
-        $informationArray = $view['informations']->pluck('information', 'created_at')->toArray();
+        $informationArray = $view['informations']->pluck('information')->toArray();
         if ($informationArray) {
             $this->assertDatabaseHas('informations', [
                 'information' => $informationArray,
@@ -54,14 +54,14 @@ class ControllerUnitTest extends TestCase
         }
         
         // 総合ランキングの取得
-        $synthesisRankings = $view['synthesisRankings']->pluck('percentage_correct_answer', 'name')->toArray();
+        $synthesisRankings = $view['synthesisRankings']->pluck('percentage_correct_answer')->toArray();
         if ($synthesisRankings) {
             $this->assertDatabaseHas('rankings', [
                 'percentage_correct_answer' => $synthesisRankings,
             ]);
         }
         // 週間ランキング取得
-        $monthRankings = $view['monthRankings']->pluck('percentage_correct_answer', 'name')->toArray();
+        $monthRankings = $view['monthRankings']->pluck('percentage_correct_answer')->toArray();
         if ($monthRankings) {
             $this->assertDatabaseHas('rankings', [
                 'percentage_correct_answer' => $monthRankings,
@@ -69,7 +69,7 @@ class ControllerUnitTest extends TestCase
         }
 
         // 週間ランキング取得
-        $weekRankings = $view['weekRankings']->pluck('percentage_correct_answer', 'name')->toArray();
+        $weekRankings = $view['weekRankings']->pluck('percentage_correct_answer')->toArray();
         if ($weekRankings) {
             $this->assertDatabaseHas('rankings', [
                 'percentage_correct_answer' => $weekRankings,
@@ -90,10 +90,10 @@ class ControllerUnitTest extends TestCase
         $response = $this->call('POST', '/', ['categories' => [1]]);
 
         $view = $response->original;
-        var_dump($view['ids']->mode('id'));
+        var_dump($view['ids']->pluck('id')->toArray());
 
         // 取得したIDは全てデータベースに存在するはず
-        $idsArray = $view['ids']->mode('id');
+        $idsArray = $view['ids']->pluck('id')->toArray();
 
         if ($idsArray) {
             $this->assertDatabaseHas('quizzes', [
@@ -107,7 +107,6 @@ class ControllerUnitTest extends TestCase
         // categoriesがnullの場合はリダイレクト
         $response = $this->call('POST', '/', ['categories' => null]);
 
-        var_dump($response);
         $this->assertEquals(302, $response->status());
     }
 
@@ -175,5 +174,50 @@ class ControllerUnitTest extends TestCase
     {
         $response = $this->call('GET', '/mypage');
         $this->assertEquals(302, $response->status());
+    }
+
+    /**
+     * Api test.
+     *
+     * @return void
+     */
+    public function testApiGetOneQuiz()
+    {
+        // img_src にデータがない場合
+        $response = $this->withHeaders([
+            'X-Header' => 'Value',
+        ])->json('GET', '/api/getonequiz/'. rand(1, 30));
+
+        $response
+            ->assertStatus(200)
+            ->assertJson([
+                'title' => true,
+                'image_src' => null,
+                'answer_1' => true,
+                'answer_2' => true,
+                'answer_3' => true,
+                'answer_4' => true,
+                'commentary' => true,
+                'correct_answer_no' => true,
+            ]);
+
+            // テストデータId36にはimage_srcがある
+            $response = $this->withHeaders([
+                'X-Header' => 'Value',
+            ])->json('GET', '/api/getonequiz/'. 36);
+    
+            // img_src にデータがある場合
+            $response
+                ->assertStatus(200)
+                ->assertJson([
+                    'title' => true,
+                    'image_src' => true,
+                    'answer_1' => true,
+                    'answer_2' => true,
+                    'answer_3' => true,
+                    'answer_4' => true,
+                    'commentary' => true,
+                    'correct_answer_no' => true,
+                ]);
     }
 }
