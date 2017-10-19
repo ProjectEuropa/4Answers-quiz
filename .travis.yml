@@ -23,8 +23,11 @@ before_script:
     - sudo service mysql stop
     - docker-compose up -d apache2 mysql
     - docker-compose run workspace composer install
+    - cd ../
+    - cp .env.example .env
+    - cd laradock
     - docker-compose run workspace php artisan key:generate
-    - cp ../.env.example .env
+    - docker-compose run workspace php artisan migrate
     - sleep 3
 
 
