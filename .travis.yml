@@ -20,7 +20,7 @@ before_script:
     - git submodule add https://github.com/Laradock/laradock.git laradock
     - cd laradock
     - cp env-example .env
-    - sudo service mysqld stop
+    - sudo service mysql stop
     - sudo service apache2 stop
     - docker-compose up -d apache2 mysql
     - docker-compose exec workspace bash
