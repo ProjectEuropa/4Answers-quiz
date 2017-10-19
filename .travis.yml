@@ -26,7 +26,6 @@ before_script:
     - cd laradock
     - docker-compose run workspace php artisan key:generate
     - docker-compose run workspace php artisan migrate
-    - sleep 3
 
 
 script:
