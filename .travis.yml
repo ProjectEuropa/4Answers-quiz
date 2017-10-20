@@ -29,4 +29,4 @@ before_script:
 
 
 script:
-    - docker-compose run workspace phpunit
+    - docker-compose run workspace ./vendor/bin/phpunit
