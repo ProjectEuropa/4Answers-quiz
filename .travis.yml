@@ -22,11 +22,11 @@ before_script:
     - docker-compose up -d apache2 mysql
     - docker-compose run workspace composer install
     - cd ../
+    - mv business-manners-quiz-test.sql laradock
     - cp .env.example .env
     - cd laradock
     - docker-compose run workspace php artisan key:generate
-    - docker-compose run workspace php artisan migrate
-
+    - docker exec -i mysql - mysql -u default --password=secret default < business-manners-quiz-test.sql 
 
 script:
     - docker-compose run workspace ./vendor/bin/phpunit
