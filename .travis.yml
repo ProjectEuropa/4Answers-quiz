@@ -26,7 +26,7 @@ before_script:
     - cp .env.example .env
     - cd laradock
     - docker-compose run workspace php artisan key:generate
-    - docker-compose exec mysql -c "mysql -u default --password=secret default < business-manners-quiz-test.sql"
+    - docker-compose exec mysql "mysql -u default --password=secret default < business-manners-quiz-test.sql exit"
 
 script:
     - docker-compose run workspace ./vendor/bin/phpunit
