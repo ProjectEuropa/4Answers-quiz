@@ -33,5 +33,6 @@ before_script:
 script:
     - docker-compose run workspace php artisan serve &
     - sleep 3
+    - which chromedriver
     - docker-compose run workspace ./vendor/bin/phpunit
     - docker-compose run workspace php artisan dusk
