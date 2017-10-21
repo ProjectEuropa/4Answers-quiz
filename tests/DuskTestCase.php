@@ -19,6 +19,8 @@ abstract class DuskTestCase extends BaseTestCase
      */
     public static function prepare()
     {
+        static::useChromedriver('/usr/local/bin/chromedriver');
+
         static::startChromeDriver();
     }
 
@@ -31,11 +33,14 @@ abstract class DuskTestCase extends BaseTestCase
     {
         $options = (new ChromeOptions)->addArguments([
             '--disable-gpu',
-            '--headless'
+            '--headless',
+            '--no-sandbox'
         ]);
 
         return RemoteWebDriver::create(
-            'http://localhost:9515', DesiredCapabilities::chrome()
+            'http://localhost:9515', DesiredCapabilities::chrome()->setCapability(
+                ChromeOptions::CAPABILITY, $options
+            )
         );
     }
 }

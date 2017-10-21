@@ -24,11 +24,13 @@ before_script:
     - cd ../
     - mv business-manners-quiz-test.sql laradock
     - cp .env.example .env
+    - cp .env .env.dusk.local
     - cd laradock
     - docker-compose run workspace php artisan key:generate
-    - docker-compose build selenium
     - docker exec -i $(docker-compose ps -q mysql) mysql -u default --password=secret default < business-manners-quiz-test.sql
 
 script:
+    - docker-compose run workspace php artisan serve &
+    - sleep 3
     - docker-compose run workspace ./vendor/bin/phpunit
     - docker-compose run workspace php artisan dusk
