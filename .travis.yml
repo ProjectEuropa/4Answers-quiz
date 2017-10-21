@@ -25,7 +25,7 @@ before_script:
     - mv business-manners-quiz-test.sql laradock
     - cp .env.example .env
     - cp .env .env.dusk.local
-    - chmod 755 vendor/laravel/dusk/bin/*
+    - sudo chmod 755 vendor/laravel/dusk/bin/*
     - cd laradock
     - docker-compose run workspace php artisan key:generate
     - docker exec -i $(docker-compose ps -q mysql) mysql -u default --password=secret default < business-manners-quiz-test.sql
