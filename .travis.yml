@@ -4,6 +4,9 @@ dist: trusty
 services:
   - docker
 
+ addons:
+    chrome: stable
+
 before_install:
     - sudo apt-get remove docker docker-engine
     - sudo apt-get update
