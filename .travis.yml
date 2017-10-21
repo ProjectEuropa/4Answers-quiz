@@ -20,6 +20,7 @@ before_script:
     - cp env-example .env
     - sudo service mysql stop
     - docker-compose up -d apache2 mysql
+    - docker-compose run workspace composer update --lock
     - docker-compose run workspace composer install
     - cd ../
     - mv business-manners-quiz-test.sql laradock
