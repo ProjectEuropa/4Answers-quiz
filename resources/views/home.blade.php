@@ -101,8 +101,8 @@ let synthesisScores =[];
 let monthNames =[];
 let monthScores =[];
 @foreach($monthRankings as $monthRanking)
-  monthNames.push("{{ $synthesisRanking->name }}");
-  monthScores.push({{ $synthesisRanking->percentage_correct_answer }});
+  monthNames.push("{{ $monthRanking->name }}");
+  monthScores.push({{ $monthRanking->percentage_correct_answer }});
 @endforeach
 
 // 週間ランキングデータ
@@ -128,12 +128,12 @@ const synthesisBarChartData = {
 }
 // 月間ランキング棒グラフデータ
 const monthBarChartData = {
-    labels : weekNames,
+    labels : monthNames,
     datasets : 
     [{
       label: BAR_LAVEL_NAME_MAX_CORRECT_PERCENTAGE,
       backgroundColor: BAR_BACKGROUND_COLOR_LIGHT_BLUE,
-      data : weekScores
+      data : monthScores
     }],
 }
 // 週間ランキング棒グラフデータ
