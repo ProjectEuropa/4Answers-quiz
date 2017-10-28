@@ -19,6 +19,7 @@ abstract class DuskTestCase extends BaseTestCase
      */
     public static function prepare()
     {
+        static::useChromedriver('./vendor/laravel/dusk/bin/chromedriver-linux');
         static::startChromeDriver();
     }
 

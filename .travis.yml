@@ -39,6 +39,6 @@ script:
     - ./vendor/laravel/dusk/bin/chromedriver-linux &
     - docker-compose run workspace php artisan serve &
     - sleep 3
-    - which chromedriver
+    - which chromedriver-linux
     - docker-compose run workspace ./vendor/bin/phpunit
     - docker-compose run workspace php artisan dusk
