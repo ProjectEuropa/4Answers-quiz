@@ -25,14 +25,12 @@ before_script:
     - echo WORKSPACE_INSTALL_DUSK_DEPS=true >> .env
     - sudo service mysql stop
     - docker-compose build workspace
-    - docker-compose build selenium
-    - docker-compose up -d nginx mysql
+    - docker-compose up -d mysql
     - docker-compose run workspace composer update --lock
     - cd ../
     - mv business-manners-quiz-test.sql laradock
     - cp .env.example .env
     - cp .env .env.dusk.local
-    - echo APP_URL=http://nginx >> .env.dusk.local
     - cd laradock
     - docker-compose run workspace php artisan key:generate
     - docker exec -i $(docker-compose ps -q mysql) mysql -u default --password=secret default < business-manners-quiz-test.sql
