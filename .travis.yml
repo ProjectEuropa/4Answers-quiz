@@ -21,7 +21,10 @@ before_script:
     - git submodule add https://github.com/Laradock/laradock.git laradock
     - cd laradock
     - cp env-example .env
+    - echo WORKSPACE_INSTALL_LARAVEL_INSTALLER=true >> .env
+    - echo WORKSPACE_INSTALL_DUSK_DEPS=true >> .env
     - sudo service mysql stop
+    - docker-compose build workspace
     - docker-compose up -d apache2 mysql
     - docker-compose run workspace composer update --lock
     - cd ../
