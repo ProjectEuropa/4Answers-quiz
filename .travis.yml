@@ -23,6 +23,7 @@ before_script:
     - cp env-example .env
     - echo WORKSPACE_INSTALL_LARAVEL_INSTALLER=true >> .env
     - echo WORKSPACE_INSTALL_DUSK_DEPS=true >> .env
+    - sed -e "s/APACHE_HOST_HTTP_PORT=80/APACHE_HOST_HTTP_PORT=8888/g" .env
     - sudo service mysql stop
     - docker-compose build workspace
     - docker-compose up -d apache2 mysql
