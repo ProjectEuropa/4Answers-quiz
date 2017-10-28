@@ -39,7 +39,6 @@ script:
     - export DISPLAY=:99.0
     - sh -e /etc/init.d/xvfb start
     - ./vendor/laravel/dusk/bin/chromedriver-linux &
-    - docker-compose run workspace php artisan serve &
     - sleep 3
     - docker-compose run workspace ./vendor/bin/phpunit
     - docker-compose run workspace php artisan dusk
