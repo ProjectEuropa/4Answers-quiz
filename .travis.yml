@@ -25,7 +25,7 @@ before_script:
     - echo WORKSPACE_INSTALL_DUSK_DEPS=true >> .env
     - sudo service mysql stop
     - docker-compose build workspace
-    - docker-compose up -d mysql
+    - docker-compose up -d apache2 mysql
     - docker-compose run workspace composer update --lock
     - cd ../
     - mv business-manners-quiz-test.sql laradock
